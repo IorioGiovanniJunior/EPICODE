@@ -1,0 +1,38 @@
+INSERT INTO Acquirente (Email, nome, cognome, telefono, data_nascita, indirizzo)
+	VALUES 
+('m.rossi@email.com', 'Marco', 'Rossi', '3281234567', '1990-04-15', 'Via Roma 12, Milano'),
+('g.bianchi@email.com', 'Giulia', 'Bianchi', '3399876543', '1985-11-22', 'Corso Garibaldi 45, Torino'),
+('l.verdi@email.com', 'Luca', 'Verdi', '3471122334', '1992-06-03', 'Via Dante 78, Bologna'),
+('s.neri@email.com', 'Sara', 'Neri', '3459988776', '1995-02-19', 'Via Leopardi 5, Firenze'),
+('a.martini@email.com', 'Alessandro', 'Martini', '3205566778', '1988-09-30', 'Viale Europa 101, Napoli');
+#HO INSERITO ALCUNI VALORI IN ACQUIRENTE
+
+INSERT INTO Prodotti (Nome, tipo, misura, prezzo, colore)
+	VALUES
+('T-shirt Basic', 'Abbigliamento', 'M', 14.99, 'Bianco'),
+('Sneakers Sport', 'Calzature', '42', 59.90, 'Nero'),
+('Jeans Slim Fit', 'Abbigliamento', 'L', 39.99, 'Blu'),
+('Zaino Casual', 'Accessori', 'Taglia Unica', 29.50, 'Grigio'),
+('Giacca Antivento', 'Abbigliamento', 'XL', 79.00, 'Rosso'),
+('Cintura in pelle', 'Accessori', '110 cm', 24.95, 'Marrone'),
+('Felpa con cappuccio', 'Abbigliamento', 'S', 34.90, 'Verde'),
+('Stivaletti Chelsea', 'Calzature', '40', 89.90, 'Beige');
+
+INSERT INTO Ordine (Email, Indirizzo, Pagamento, data_ordine)
+		VALUES 
+('m.rossi@email.com', 'Via Roma 12, Milano', 1, '2025-05-25'),
+('g.bianchi@email.com', 'Corso Garibaldi 45, Torino', 0, '2025-05-28'),
+('l.verdi@email.com', 'Via Dante 78, Bologna', 1, '2025-05-27'),
+('s.neri@email.com', 'Via Leopardi 5, Firenze', 0, '2025-05-29'),
+('a.martini@email.com', 'Viale Europa 101, Napoli', 1, '2025-05-30');
+
+INSERT INTO Dettaglio_ordine (ProdottoID, OrdineID, Prezzo, Quantita)
+		VALUES
+(1, 1, 14.99, 2),   -- T-shirt Basic per ordine 1
+(2, 1, 59.90, 1),   -- Sneakers Sport per ordine 1
+(3, 2, 39.99, 1),   -- Jeans Slim Fit per ordine 2
+(4, 3, 29.50, 1),   -- Zaino Casual per ordine 3
+(5, 3, 79.00, 1),   -- Giacca Antivento per ordine 3
+(6, 4, 24.95, 2),   -- Cintura per ordine 4
+(7, 5, 34.90, 1),   -- Felpa con cappuccio per ordine 5
+(8, 5, 89.90, 1);   -- Stivaletti Chelsea per ordine 5

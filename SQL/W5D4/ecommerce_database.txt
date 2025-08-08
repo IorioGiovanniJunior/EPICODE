@@ -1,0 +1,56 @@
+#Creo il database del diagramma ecommerce
+CREATE DATABASE Ecommerce;
+#definisco ecommerce come quello da utilizzare
+USE Ecommerce;
+#creo la tabella Acquirente
+CREATE TABLE Acquirente (
+  Email VARCHAR (100) PRIMARY KEY,
+  Nome VARCHAR (50) NOT NULL,
+  cognome VARCHAR (50),
+  telefono VARCHAR (10) NOT NULL UNIQUE,
+  Data_Nascita DATE,
+  Indirizzo VARCHAR (255) NOT NULL
+  );
+  #Creo la tabella prodottI
+  CREATE TABLE Prodotti (
+    ProdottoID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR (100) NOT NULL,
+    Tipo VARCHAR (50) NOT NULL,
+    Misura VARCHAR (50),
+    Prezzo DECIMAL (10,2) NOT NULL,
+    colore VARCHAR (20)
+    );
+
+#Creo la tabella ORDINE
+CREATE TABLE Ordine (
+    OrdineID INT AUTO_INCREMENT PRIMARY KEY,
+    Email VARCHAR (100) NOT NULL,
+    Indirizzo VARCHAR (255) NOT NULL,
+    Pagamento BOOLEAN DEFAULT FALSE,
+    data_ordine DATE NOT NULL,
+    Prezzo_totale DECIMAL (10,2) NOT NULL,
+    CONSTRAINT fk_Acquirente
+				FOREIGN KEY (Email) REFERENCES Acquirente (Email)
+    );
+#CREO LA TABELLA DETTAGLIO_ORDINE
+CREATE TABLE Dettaglio_ordine (
+	DettaglioID INT AUTO_INCREMENT PRIMARY KEY,
+    OrdineID INT NOT NULL,
+    ProdottoID INT NOT NULL,
+    Prezzo DECIMAL (10,2) NOT NULL,
+    Quantita INT DEFAULT '1'
+);
+#MODIFICO QUANTITA PERCHE SIA DI DEFAULT INTERO 1 NON STRINGA E METTO REGOLA DI CHECK CHE SIA SEMPRE MAGGIORE DI 0
+ALTER TABLE Dettaglio_ordine
+MODIFY Quantita INT DEFAULT 1 CHECK (Quantita > 0);
+
+
+#cerco di add la constraint che mancava ordine id (relazione delle tabelle)
+ALTER TABLE Dettaglio_ordine
+ADD CONSTRAINT fk_Ordine
+		FOREIGN KEY (OrdineID) REFERENCES Ordine (OrdineID);
+
+# cerco di add la constraint che mancava prodotto id (relazione tabella prodotti)
+ALTER TABLE Dettaglio_ordine
+ADD CONSTRAINT fk_Prodotto
+		FOREIGN KEY (ProdottoID) REFERENCES Prodotti (ProdottoID);
